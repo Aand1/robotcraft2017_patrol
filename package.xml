@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>robotcraft2017_patrol</name>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
   <description>The robotcraft2017_patrol package for realistic simulation of a multi-robot patrolling system in a simple arena.</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
@@ -42,34 +42,14 @@
   <buildtool_depend>catkin</buildtool_depend>
   
   <build_depend>actionlib</build_depend>
-  <build_depend>costmap_2d</build_depend>
-  <build_depend>geometry_msgs</build_depend>  
   <build_depend>move_base_msgs</build_depend>
   <build_depend>nav_core</build_depend>
-  <build_depend>nav_msgs</build_depend>
-  <build_depend>pluginlib</build_depend>
-  <build_depend>roscpp</build_depend>
-  <build_depend>roslib</build_depend>
-  <build_depend>std_msgs</build_depend>
-  <build_depend>std_srvs</build_depend>
-  <build_depend>tf</build_depend>  
 
-  <run_depend>actionlib</run_depend>
   <run_depend>amcl</run_depend>
-  <run_depend>costmap_2d</run_depend>
+  <run_depend>map_server</run_depend>
   <run_depend>move_base</run_depend>
-  <run_depend>move_base_msgs</run_depend>
   <run_depend>nav_core</run_depend>
-  <run_depend>nav_msgs</run_depend>
-  <run_depend>pluginlib</run_depend>
-  <run_depend>robot_state_publisher</run_depend>
-  <run_depend>roscpp</run_depend>
-  <run_depend>roslib</run_depend>
   <run_depend>stage_ros</run_depend>
-  <run_depend>std_msgs</run_depend>
-  <run_depend>std_srvs</run_depend>
-  <run_depend>tf</run_depend>
-  <run_depend>urdf</run_depend>  
 
 
   <!-- The export tag contains other, unspecified, tags -->

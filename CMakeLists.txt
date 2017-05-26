@@ -5,24 +5,9 @@ project(robotcraft2017_patrol)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  actionlib
-  amcl
-  costmap_2d
-  geometry_msgs
-  map_server
-  move_base
-  move_base_msgs
-  nav_core
-  nav_msgs
-  pluginlib
-  robot_state_publisher
-  roscpp
-  roslib
-  stage_ros
-  std_msgs
-  std_srvs
-  tf
-  urdf
+   actionlib
+   move_base_msgs
+   nav_core
 )
 
 ## System dependencies are found with CMake's conventions
@@ -117,7 +102,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
    LIBRARIES call_clear_costmap_service
-   CATKIN_DEPENDS nav_core pluginlib roscpp costmap_2d tf std_srvs
+   CATKIN_DEPENDS nav_core
 #  DEPENDS system_lib
 )
 
