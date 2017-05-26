@@ -1,0 +1,67 @@
+# Syntax of .world file for Stage simulator can be found here:
+# http://rtv.github.io/Stage/modules.html
+
+
+define rplidar ranger(
+  
+  sensor(       
+    pose [0 0 0 0]
+    range [ 0.0  6.0 ]
+    fov 360.0
+    samples 360
+    #noise [ 0.5 0.5 20 ] #constant noise in meters, proportional noise, angular noise in degrees
+  )
+
+  # model properties
+  color "black"
+  size [ 0.076 0.076 0.100 ]
+
+  block( points 4
+    point[0] [0 0]
+    point[1] [0 1]
+    point[2] [1 1]
+    point[3] [1 0]
+    z [0 1]
+  ) 
+)
+
+
+define floorplan model (
+    color "gray"
+    boundary 0
+    gui_nose 1
+    gui_grid 0
+    gui_move 0
+    gui_outline 0
+    gripper_return 0
+    fiducial_return 0
+)
+
+
+window( 
+  size [ 800 700 1]         
+  rotate [ 0 0]    
+  center [ 3.9 2.7 0 ]       
+  scale 85                 # zoom
+  show_data 1
+  show_clock 1
+)
+
+
+floorplan (
+  size [7.800 5.400 1.000]
+  pose [3.900 2.700 0.000 0.000]
+  bitmap "patrol_maze.png"
+)
+
+
+#include the definition of the robot:
+include "robot.inc"
+
+
+stopy_robot(pose [ 0.9  2.7  0.000  0.000 ]    name "robot_0"  color "red")
+
+stopy_robot(pose [ 6.9  4.5  0.000 -180.000 ]  name "robot_1"  color "green")
+
+stopy_robot(pose [ 6.9  0.9  0.000 90.000 ]    name "robot_2"  color "blue")
+

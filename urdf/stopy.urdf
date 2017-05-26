@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot name="stopy">
+  
+  
+  
+  <!----------------------------------------------------- BASE ------------------------------------------------------------>
+  
+  <link name="base_link" >
+      <visual>      
+	<origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+	<geometry>
+          <mesh filename="package://robotcraft2017_patrol/urdf/stopy.stl" /> 
+      </geometry>
+      <material name="skin">
+        <color rgba="1.0 1.0 1.0 1.0" />
+      </material>
+    </visual>
+   <!--<collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" /> 
+      <geometry>
+	<mesh filename="package://robotcraft2017_patrol/urdf/stopy_chull.stl" />
+      </geometry>
+    </collision>-->
+  </link> 
+  	
+</robot>
