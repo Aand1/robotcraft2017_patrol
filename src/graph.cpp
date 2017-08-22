@@ -161,8 +161,8 @@ void load_graph (vertex_set *graph){
     graph[9].id_neigh[1] = 8;   //the 2nd neighbor of vertex 9 is vertex 8
     graph[9].cost[1] = 2.1;     //distance between vertex 9 and vertex 8.     
     
-    graph[9].id_neigh[1] = 10;  //the 3rd neighbor of vertex 9 is vertex 10
-    graph[9].cost[1] = 1.8;     //distance between vertex 9 and vertex 10. 
+    graph[9].id_neigh[2] = 10;  //the 3rd neighbor of vertex 9 is vertex 10
+    graph[9].cost[2] = 1.8;     //distance between vertex 9 and vertex 10. 
     
       
     //VERTEX 10:
