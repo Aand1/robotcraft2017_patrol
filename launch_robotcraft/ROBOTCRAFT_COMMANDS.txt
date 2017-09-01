@@ -1,0 +1,99 @@
+
+
+IPs:
+robot-0 (192.168.1.10)
+robot-1 (192.168.1.11)
+robot-2 (192.168.1.12)
+
+
+NETWORK: 
+INGENIARIUS_LAB
+
+
+SSH:
+stop@robot-0
+stop@robot-1
+stop@robot-2
+
+
+0)
+roslaunch utils multimaster.launch
+
+
+1) 
+roslaunch utils stopy_drivers_robotcraft.launch
+
+2) 
+roslaunch utils navigation_robotcraft.launch
+[opens rviz]
+
+3)
+compile with:
+catkin_make --pkg robotcraft2017_patrol
+
+4)
+roslaunch utils start_robot_0.launch
+[their pkg]
+
+
+
+
+======== bash ========
+
+
+BASHRC:
+
+source /opt/ros/kinetic/setup.bash
+source /home/stop/catkin_ws/devel/setup.bash
+
+export ROS_PACKAGE_PATH=/home/stop/catkin_ws:$ROS_PACKAGE_PATH
+export ROS_WORKSPACE=/home/stop/catkin_ws
+
+
+export ROS_HOSTNAME=robot-0
+export ROS_IP=192.168.1.10
+
+export ROS_HOSTNAME=robot-1
+export ROS_IP=192.168.1.11
+
+export ROS_HOSTNAME=robot-2
+export ROS_IP=192.168.1.12
+
+
+
+
+======== multimaster config ========
+
+
+/home/stop/catkin_ws/src/stop_robot_bringup/utils/multimaster.config.yaml:
+
+sync_topics: ['/communication']     #for any host
+
+
+
+
+======== test communication ========
+
+rostopic pub -r 2 /communication std_msgs/Int16MultiArray "{data:[-1, 100]}"
+
+rostopic echo /communication
+
+
+
+
+======== clear costmaps (problems in navigation) ========
+
+rosservice call robot_0/move_base/clear_costmaps
+rosservice call robot_1/move_base/clear_costmaps
+rosservice call robot_2/move_base/clear_costmaps
+
+
+
+
+======== etc/hosts ========
+
+127.0.0.1       localhost
+127.0.1.1       [robot_X]
+192.168.1.10    robot-0
+192.168.1.11    robot-1
+192.168.1.12    robot-2

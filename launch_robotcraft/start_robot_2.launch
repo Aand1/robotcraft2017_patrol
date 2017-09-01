@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- THIS IS THE ENTRY POINT TO LAUNCH YOUR ROBOT'S BEHAVIOR -->
+<launch>
+    
+    <!-- Use sim time for simulations-->
+    <!--<param name="use_sim_time" value="true" />-->
+    
+    <!-- Start "robot_2"-->
+    <node name="patrolbot_2" pkg="robotcraft2017_patrol" type="patrolbot" output="screen"> 
+        <param name="robot_id" value="2" /> 
+    </node>
+     
+</launch>

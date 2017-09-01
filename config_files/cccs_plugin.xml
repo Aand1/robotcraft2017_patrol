@@ -1,7 +1,0 @@
-<library path="lib/libcall_clear_costmap_service">
-  <class name="call_clear_costmap_service/CallClearCostmapService" type="call_clear_costmap_service::CallClearCostmapService" base_class_type="nav_core::RecoveryBehavior">
-    <description>
-      A recovery behavior that clears all layers of the costmap.
-    </description>
-  </class>
-</library>

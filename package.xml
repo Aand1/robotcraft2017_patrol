@@ -2,7 +2,7 @@
 <package>
   <name>robotcraft2017_patrol</name>
   <version>0.1.0</version>
-  <description>The robotcraft2017_patrol package for realistic simulation of a multi-robot patrolling system in a simple arena.</description>
+  <description>The robotcraft2017_patrol package for a physical multi-robot patrolling system in a simple arena.</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
   <!-- Example:  -->
@@ -49,12 +49,12 @@
   <run_depend>map_server</run_depend>
   <run_depend>move_base</run_depend>
   <run_depend>nav_core</run_depend>
-  <run_depend>stage_ros</run_depend>
+  <!--<run_depend>stage_ros</run_depend>-->
 
 
   <!-- The export tag contains other, unspecified, tags -->
-  <export>
+<!--  <export>-->
     <!-- Other tools can request additional information be placed here -->
-    <nav_core plugin="${prefix}/config_files/cccs_plugin.xml" />
-  </export>
+<!--    <nav_core plugin="${prefix}/config_files/cccs_plugin.xml" />
+  </export>-->
 </package>

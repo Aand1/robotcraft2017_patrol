@@ -1,0 +1,5 @@
+<launch>
+  <param name="amcl/initial_pose_x" value="0.9"/>
+  <param name="amcl/initial_pose_y" value="2.7"/>
+  <param name="amcl/initial_pose_a" value="0.0"/>
+</launch>

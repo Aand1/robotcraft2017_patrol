@@ -1,0 +1,39 @@
+# Choose what to sync: 
+    
+#    ~sync_hosts (array, default: [])
+#    This list with names of ROS master to synchronize. Only this ROS master in this list will be synchronized. The ~ignore_hosts list is processed first. 
+    
+#    ~sync_topics (array, default: [])
+#    The list of topics to synchronize.
+    
+#    ~sync_services (array, default: [])
+#    The list of services to synchronize. The ~ignore_nodes and ~ignore_services lists are processed first. 
+
+# WARNING: This assumes multimaster_fkie v0.7.4 (May, 2017)
+  
+    
+
+sync_topics: ['/communication']     #for any host
+
+# topics from specific hosts:
+
+#sync_topics:
+#    - ing3:
+#        - /results
+
+
+#only sync specific hosts:
+#sync_hosts: ['ing3'] 
+
+
+#ignore_hosts: ['robot_X']  #ignore specific host
+#ignore_hosts: ['*']        #ignore ROS topics/services/msgs coming from any host
+#ignore_topics: ['/*']      #ignore all topics
+#ignore_services: ['/*']    #ignore all services
+
+
+#ignore (specific) topics from (specific) hosts:
+
+#ignore_topics:
+#    - robot-1:
+#        - /cmd_vel

@@ -59,5 +59,7 @@ recovery_behaviors:
   - name: 'clear_all_costmaps'
     type: 'call_clear_costmap_service/CallClearCostmapService'
 
+    #clear_all_costmaps will be loaded by another pkg on the robot (ignore errors in stage: this pkg is not meant for stage)
+    
 aggressive_reset:
   reset_distance: 1.25

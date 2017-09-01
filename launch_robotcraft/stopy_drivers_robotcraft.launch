@@ -1,0 +1,88 @@
+<!-- Launch all robot drivers at once -->   
+            
+
+<launch>
+
+  <!--Carefully change this for each robot -->
+
+   <arg name="robotname" default="robot_0" />           <!-- for 1st robot -->   
+   <!--<arg name="robotname" default="robot_1" />-->    <!-- for 2nd robot --> 
+   <!--<arg name="robotname" default="robot_2" />-->    <!-- for 3rd robot -->
+   
+    
+     <group ns="$(arg robotname)">  
+
+        <!--Firmware -->
+        <include file="$(find stopy_drivers)/launch/robot_firmware.launch" pass_all_args="true"/>
+        
+        <!--Laser -->
+        <node name="rplidarNode"          pkg="rplidar_ros"  type="rplidarNode" output="screen">
+            <param name="serial_port"         type="string" value="/dev/rplidar"/>  <!--usually "/dev/ttyUSB0"-->
+            <param name="serial_baudrate"     type="int"    value="115200"/>
+            <param name="frame_id"            type="string" value="$(arg robotname)/base_laser_link"/>
+            <param name="inverted"            type="bool"   value="false"/>
+            <param name="angle_compensate"    type="bool"   value="true"/>
+            <remap from="start_motor" to="rplidarNode/start_motor"/> <!--remapping service for consistency-->
+            <remap from="stop_motor" to="rplidarNode/stop_motor"/>   <!--remapping service for consistency-->
+        </node>
+    
+        <!-- Load laser filtering node: -->
+        <node pkg="stopy_drivers" type="laser_filtering" name="laser_filtering">
+            <param name="input_scan" value="scan"/>
+            <param name="output_scan" value="scan_filtered"/>
+            <param name="range_threshold" value="0.259"/>
+            <param name="points_to_filter" value="9"/>
+        </node>
+        
+        
+        <!-- static TF: base_link to base_laser_link --> 
+        <node pkg="tf" type="static_transform_publisher" name="static_laser_tf" args="0.0 0.0 0.29 0 0 0 $(arg robotname)/base_link $(arg robotname)/base_laser_link 100" respawn="true"/>     
+        
+     
+        <!-- Run AMCL -->
+        <node pkg="amcl" type="amcl" name="amcl">
+            
+            <remap from="scan" to="scan_filtered"/>
+            <remap from="map" to="/map"/>
+            <remap from="static_map" to="/static_map"/>
+            
+            <param name="odom_model_type" value="diff"/>
+            <param name="transform_tolerance" value="0.5" />
+            <param name="gui_publish_rate" value="1.0"/>
+            <param name="laser_max_beams" value="30"/>
+            <param name="min_particles" value="1000"/>
+            <param name="max_particles" value="5000"/>
+            <param name="kld_err" value="0.05"/>
+            <param name="kld_z" value="0.99"/>
+            <param name="odom_alpha1" value="0.2"/>
+            <param name="odom_alpha2" value="0.2"/>
+            <param name="odom_alpha3" value="0.2"/>
+            <param name="odom_alpha4" value="0.2"/>
+            <param name="odom_alpha5" value="0.2"/>
+            <param name="laser_z_hit" value="0.95"/>
+            <param name="laser_z_short" value="0.1"/>
+            <param name="laser_z_max" value="0.05"/>
+            <param name="laser_z_rand" value="0.5"/>
+            <param name="laser_sigma_hit" value="0.2"/>
+            <param name="laser_lambda_short" value="0.1"/>
+            <param name="laser_model_type" value="likelihood_field"/>
+            <param name="laser_likelihood_max_dist" value="2.0"/>
+            <param name="update_min_d" value="0.2"/>
+            <param name="update_min_a" value="0.5"/>
+            <param name="global_frame_id" value="/map"/>
+            <param name="base_frame_id" value="$(arg robotname)/base_link"/>
+            <param name="odom_frame_id" value="$(arg robotname)/odom"/>
+            <param name="resample_interval" value="2"/>                    
+            
+        </node>           
+        
+        <!-- AMCL initial positions for each specific robot -->
+        <include file="$(find utils)/launch_robotcraft/$(arg robotname)_initial_pose.xml" />          
+    
+    </group>
+    
+    
+    <!-- Run map server -->
+    <node name="map_server_0" pkg="map_server" type="map_server" args="$(find utils)/maps/patrol_maze.yaml"/>     
+    
+</launch>        

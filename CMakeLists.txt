@@ -101,8 +101,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-   LIBRARIES call_clear_costmap_service
-   CATKIN_DEPENDS nav_core
+#  LIBRARIES call_clear_costmap_service
+#  CATKIN_DEPENDS nav_core
 #  DEPENDS system_lib
 )
 
@@ -124,8 +124,8 @@ include_directories(
 #   src/${PROJECT_NAME}/robotcraft2017_patrol.cpp
 # )
 
-add_library(call_clear_costmap_service config_files/call_clear_costmap_service.cpp)
-target_link_libraries(call_clear_costmap_service ${catkin_LIBRARIES})
+#add_library(call_clear_costmap_service config_files/call_clear_costmap_service.cpp)
+#target_link_libraries(call_clear_costmap_service ${catkin_LIBRARIES})
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -193,19 +193,19 @@ target_link_libraries(patrolbot
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 # )
 
-install(TARGETS call_clear_costmap_service
-       ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-       LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-       )
-
-install(FILES config_files/cccs_plugin.xml
-    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
-
-install(DIRECTORY include/${PROJECT_NAME}/
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-  PATTERN ".svn" EXCLUDE
-)
+# install(TARGETS call_clear_costmap_service
+#        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#        )
+# 
+# install(FILES config_files/cccs_plugin.xml
+#     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+# )
+# 
+# install(DIRECTORY include/${PROJECT_NAME}/
+#   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+#   PATTERN ".svn" EXCLUDE
+# )
 
 #############
 ## Testing ##

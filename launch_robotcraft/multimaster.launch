@@ -1,0 +1,12 @@
+<!-- Multimaster launch test -->
+
+<launch>
+
+
+    <node pkg="master_discovery_fkie" type="master_discovery" name="master_discovery" output="screen"/>
+    
+    <node pkg="master_sync_fkie" type="master_sync" name="master_sync" output="screen">
+        <rosparam file="$(find utils)/multimaster_config.yaml" command="load" />
+    </node>
+    
+</launch>

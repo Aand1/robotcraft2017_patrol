@@ -192,3 +192,46 @@ void load_graph (vertex_set *graph){
     graph[11].id_neigh[0] = 10;  //the 1st neighbor of vertex 11 is vertex 10
     graph[11].cost[0] = 1.8;     //distance between vertex 11 and vertex 10.    
 }
+
+
+//time string for filename
+void get_time_string(char* timestring){
+  time_t rawtime;
+  struct tm * timeinfo;
+  time ( &rawtime );
+  timeinfo = localtime ( &rawtime );
+  strftime(timestring, 21, "%d-%m-%Y_%Hh%Mm%Ss", timeinfo);
+}
+
+
+//get log file:
+std::string get_log_file(FILE *results, int robot_id){
+    
+    std::stringstream id_stream;
+    id_stream << robot_id;
+    
+    char time_string [21];
+    get_time_string (time_string);
+    
+    //get home folder:
+    char* home_folder;
+    home_folder = getenv("HOME");
+    std::string home_folder_std (home_folder); 
+    
+    std::string get_log_file = home_folder_std + "/robot_" + id_stream.str() + "_" + time_string + ".csv";
+    return get_log_file;
+}
+
+
+//log visited vertex by robot:
+void write_visit_to_file (FILE *results, std::string file_path, int robot_id, double timestamp, int vertex_reached){    
+    results=fopen (file_path.c_str(),"a");
+    fprintf(results, "%i;%f;%i\n", robot_id, timestamp, vertex_reached);
+    fclose(results);
+}
+
+
+//close file:
+void close_log_file(FILE *results){
+    fclose(results);
+}

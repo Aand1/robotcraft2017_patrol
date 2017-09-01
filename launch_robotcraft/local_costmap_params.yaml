@@ -1,0 +1,14 @@
+local_costmap:
+  global_frame: odom #hector_map
+  robot_base_frame: base_link
+  update_frequency: 5.0
+  publish_frequency: 1.0 #just for visualization
+  static_map: false
+  rolling_window: true
+  width: 6.0
+  height: 6.0
+  resolution: 0.025 
+  
+  inflation_radius: 0.5       # robot will not be overly confident in tight spaces
+  cost_scaling_factor: 1.0
+  footprint_padding: 0.05      #-0.1 only for sims

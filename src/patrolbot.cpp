@@ -14,12 +14,18 @@ typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseCl
 int robot_id;
 ros::Publisher *comm_pub_ptr;
 
+//variables for logging:
+FILE *results;
+std::string file_path;
+int goal_vertex;
+
 
 //Callback triggered everytime this robot reaches a goal (or aborts its goals):
 void goalDoneCallback(const actionlib::SimpleClientGoalState &state, const move_base_msgs::MoveBaseResultConstPtr &result){
 	
 	if(state.state_ == actionlib::SimpleClientGoalState::SUCCEEDED){
  		ROS_INFO("Robot %d successfully reached goal.", robot_id);
+                write_visit_to_file (results, file_path, robot_id, ros::Time::now().toSec(), goal_vertex);
 	}else{
  		ROS_INFO("Robot %d could not reach goal. Gave up!", robot_id);
 	}
@@ -116,21 +122,29 @@ int main(int argc, char** argv){
   //add your initializations here:
   //........
   //........
-  
+  file_path = get_log_file(results, robot_id);
+  results=fopen (file_path.c_str(),"a"); //open log file
+  fprintf(results, "robot_id,time visited;vertex\n"); //file Header
+  fclose(results);   
   
   //A simple example of defining navigation goals based on the graph:
   if (robot_id==0){//send "robot_0" from vertex 4 to vertex 5
+     goal_vertex = 4;
      graph[4].visits++;    //mark vertex 4 as visited once
      target_vertex = 5;
         
   }else if (robot_id==1){//send "robot_1" from vertex 11 to vertex 10
+     goal_vertex = 11;
      graph[11].visits++;    //mark vertex 11 as visited once
      target_vertex = 10;       
         
   }else{//send "robot_2" from vertex 3 to vertex 7
+     goal_vertex = 3;
      graph[3].visits++;    //mark vertex 3 as visited once
      target_vertex = 7;   
   }
+  
+  write_visit_to_file (results, file_path, robot_id, ros::Time::now().toSec(), goal_vertex); //initial vertex 
   
   target_x = graph[target_vertex].x; 
   target_y = graph[target_vertex].y;   
@@ -171,7 +185,7 @@ int main(int argc, char** argv){
     loop_rate.sleep();
   }
   
-
+  close_log_file(results);
   delete graph;
   return 0;
 }
